@@ -75,3 +75,38 @@ Debo poder emitir el valor que la caja de texto que envia o genera, esto lo hace
 ----
 Mappers en Flutter
 
+
+---
+## Capa de Proteccion a mi codigo
+Al tener un modelo en nuestro codigo que define con es la respuesta de la peticion HTTP tenemos la seguridad o la proteccion que si nuestra aplicacion cambia o la API cambia, el cambio lo tenemos que hacer donde se encuentra nuestro modelo.
+```
+class YesNoModel {
+  YesNoModel({
+    required this.answer,
+    required this.forced,
+    required this.image,
+  });
+
+  final String answer;
+  final bool forced;
+  final String image;
+
+  factory YesNoModel.fromJsonMap(Map<String, dynamic> json) => YesNoModel(
+        answer: json["answer"],
+        forced: json["forced"],
+        image: json["image"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "answer": answer,
+        "forced": forced,
+        "image": image,
+      };
+
+  Message toMessageEntity() => Message(
+    text: answer == 'yes' ? 'Si' : 'No', 
+    fromWho: FromWho.her,
+    imageUrl: image
+  );
+}
+```
