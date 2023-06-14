@@ -7,11 +7,17 @@ final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
+      name: HomeScreen.nameRoute,
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-        path: '/buttons', builder: (context, state) => const ButtonsScreen()),// Esto permite realizar la configuracion de rutas o endpoint
+        path: '/buttons',
+        name: ButtonsScreen.nameRoute,
+        builder: (context, state) =>
+            const ButtonsScreen()), // Esto permite realizar la configuracion de rutas o endpoint
     GoRoute(
-        path: '/cards', builder: (context, state) => const CardsScreen())
+        path: '/cards',
+        name: CardsScreen.nameRoute,
+        builder: (context, state) => const CardsScreen())
   ],
 );

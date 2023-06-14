@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_app/config/menu/menu_item.dart';
-import 'package:widgets_app/presentation/screens/buttons/buttons_screen.dart';
+import 'package:widgets_app/presentation/screens/screens.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String nameRoute = 'home_screen';
   const HomeScreen({super.key});
 
   @override
@@ -45,7 +46,8 @@ class _HomeView extends StatelessWidget {
               //   ),
               // );
               // Navigator.pushNamed(context, menuItem.link);
-            context.push(menuItem.link);
+              context.push(menuItem.link); //utilizando mediante la ruta
+              // context.pushNamed(CardsScreen.nameRoute); // mediante el nombre de la pantall
             },
           );
         });
