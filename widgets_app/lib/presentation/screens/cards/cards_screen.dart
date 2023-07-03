@@ -40,7 +40,12 @@ class _CardsView extends StatelessWidget {
           ...cards.map(
               (e) => _CardType1(label: e['label'], elevation: e['elevation'])),
           ...cards.map(
-              (e) => _CardType2(label: e['label'], elevation: e['elevation']))
+              (e) => _CardType2(label: e['label'], elevation: e['elevation'])),
+          ...cards.map(
+              (e) => _CardType3(label: e['label'], elevation: e['elevation'])),
+          ...cards.map(
+              (e) => _CardType4(label: e['label'], elevation: e['elevation'])),
+              const SizedBox(height: 50),
         ],
       ),
     );
@@ -106,6 +111,80 @@ class _CardType2 extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _CardType3 extends StatelessWidget {
+  const _CardType3({required this.label, required this.elevation});
+
+  final String label;
+  final double elevation;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Card(
+      color: colors.surfaceVariant,
+      elevation: elevation,
+      shape: const RoundedRectangleBorder(
+          // side: BorderSide(color: colors.outline),
+          borderRadius: BorderRadius.all(Radius.circular(12))),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  icon: const Icon(Icons.more_vert), onPressed: () {}),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text('$label - fill'),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardType4 extends StatelessWidget {
+  const _CardType4({required this.label, required this.elevation});
+
+  final String label;
+  final double elevation;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Card(
+      clipBehavior: Clip
+          .hardEdge, // Esto evita que los hijos salgan de su padre en un card
+      color: colors.surfaceVariant,
+      elevation: elevation,
+      child: Stack(
+        children: [
+          Image.network(
+            'https://picsum.photos/id/${elevation.toInt()}/600/250',
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(20))),
+                child: IconButton(
+                  icon: const Icon(Icons.more_vert_outlined),
+                  onPressed: () {},
+                )),
+          )
+        ],
       ),
     );
   }
