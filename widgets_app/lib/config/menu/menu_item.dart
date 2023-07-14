@@ -43,5 +43,10 @@ const appMenuItems = <MenuItem>[
       title: 'Controles + Tiles',
       subTitle: 'Una serie de controles',
       link: '/controls',
-      icon: Icons.check_box_outlined),
+      icon: Icons.car_rental_outlined),
+  MenuItem(
+      title: 'Tutorial',
+      subTitle: 'tutorial introductorio',
+      link: '/tutorial',
+      icon: Icons.accessibility_new_rounded),
 ];
