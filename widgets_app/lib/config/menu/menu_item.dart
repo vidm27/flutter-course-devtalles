@@ -54,4 +54,9 @@ const appMenuItems = <MenuItem>[
       subTitle: 'tutorial introductorio',
       link: '/infinite',
       icon: Icons.insights),
+  MenuItem(
+      title: 'Counter',
+      subTitle: 'counter screen',
+      link: '/counter',
+      icon: Icons.countertops),
 ];
