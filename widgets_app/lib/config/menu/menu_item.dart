@@ -59,4 +59,9 @@ const appMenuItems = <MenuItem>[
       subTitle: 'counter screen',
       link: '/counter',
       icon: Icons.countertops),
+  MenuItem(
+      title: 'Theme changer',
+      subTitle: 'theme screen',
+      link: '/theme',
+      icon: Icons.theater_comedy),
 ];
