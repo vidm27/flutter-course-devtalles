@@ -45,36 +45,47 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     if (slideShowMovies.isEmpty) return const CircularProgressIndicator();
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const CustomAppbar(),
-          MoviesSlideShow(movies: slideShowMovies),
-          MovieHorizontalListView(
-            movies: nowPlayingMovies,
-            title: 'En Cines',
-            subTitle: 'Lunes 20',
-            loadNextPage: () =>
-                ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
-          ),
-          MovieHorizontalListView(
-            movies: nowPlayingMovies,
-            title: 'Próximamente',
-            subTitle: 'En este mes',
-            loadNextPage: () =>
-                ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
-          ),
-          MovieHorizontalListView(
-            movies: nowPlayingMovies,
-            title: 'Populares',
-            subTitle: '',
-            loadNextPage: () =>
-                ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
-          ),
-          const SizedBox(height: 20,)
-        ],
+    return CustomScrollView(slivers: [
+      const SliverAppBar(
+        floating: true,
+        flexibleSpace: FlexibleSpaceBar(
+          title: CustomAppbar(),
+        ),
       ),
-    );
+      SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+        return Column(
+          children: [
+            // const CustomAppbar(),
+            MoviesSlideShow(movies: slideShowMovies),
+            MovieHorizontalListView(
+              movies: nowPlayingMovies,
+              title: 'En Cines',
+              subTitle: 'Lunes 20',
+              loadNextPage: () =>
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+            ),
+            MovieHorizontalListView(
+              movies: nowPlayingMovies,
+              title: 'Próximamente',
+              subTitle: 'En este mes',
+              loadNextPage: () =>
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+            ),
+            MovieHorizontalListView(
+              movies: nowPlayingMovies,
+              title: 'Populares',
+              subTitle: '',
+              loadNextPage: () =>
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+            ),
+            const SizedBox(
+              height: 20,
+            )
+          ],
+        );
+      }, childCount: 1))
+    ]);
   }
 }
 
