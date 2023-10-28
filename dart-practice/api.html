@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background: grey;
+        padding: 1rem 1.2rem;
+    }
+</style>
+
+<body>
+    <div class="container" id="list--todo">
+       
+    </div>
+
+    <script>
+
+        async function fetchApi() {
+            const res = await fetch("https://jsonplaceholder.typicode.com/todos")
+            const data = await res.json()
+            return data;
+        }
+
+        async function renderTodo() {
+            const container = document.getElementById("list--todo");
+            const todos = await fetchApi()       
+            const first_five_todo = todos.slice(0, 5)     
+            for (const j of first_five_todo) {
+                const card =`
+                <div class="card">
+            <h3>${j['title']}</h3>
+            <div>
+                <span>completada: </span><span>${j['completed']}</span>
+            </div>
+        </div>
+                `
+                container.insertAdjacentHTML('beforeend', card);
+            }
+        }
+        renderTodo().then(() => { console.log("end render") })
+    </script>
+</body>
+
+</html>
