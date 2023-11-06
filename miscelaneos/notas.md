@@ -5,3 +5,6 @@
 `AppLifecycleState` maneja los estados de la aplicacion.
 
 El estado inicial de la aplicacion en `AppLifecycleState` es resumed.
+
+# Slivers
+Los slivers requieren un scroll especializado
