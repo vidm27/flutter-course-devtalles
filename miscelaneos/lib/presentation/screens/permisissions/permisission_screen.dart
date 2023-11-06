@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miscelaneos/presentation/providers/providers.dart';
 
 class PermissionsScreen extends StatelessWidget {
   const PermissionsScreen({super.key});
@@ -14,19 +16,50 @@ class PermissionsScreen extends StatelessWidget {
   }
 }
 
-class _PermissionView extends StatelessWidget {
+class _PermissionView extends ConsumerWidget {
   const _PermissionView();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final permissions = ref.watch(permissionsProvider);
     return ListView(
       children: [
         CheckboxListTile(
-          value: true,
-          onChanged: (value) {},
+          value: permissions.cameraGranted,
+          onChanged: (_) {
+            ref.read(permissionsProvider.notifier).requestCameraAcess();
+          },
           title: const Text('Camara'),
-          subtitle: const Text('Estado actual'),
-        )
+          subtitle: Text('${permissions.camera}'),
+          
+        ),
+        CheckboxListTile(
+          value: permissions.locationGranted,
+          onChanged: (_) {
+            ref.read(permissionsProvider.notifier).requestLocationAccess();
+          },
+          title: const Text('Location'),
+          subtitle: Text('${permissions.location}'),
+          
+        ),
+        CheckboxListTile(
+          value: permissions.sensorsGranted,
+          onChanged: (_) {
+            ref.read(permissionsProvider.notifier).requestSensorAccess();
+          },
+          title: const Text('Sensors'),
+          subtitle: Text('${permissions.location}'),
+          
+        ),
+        CheckboxListTile(
+          value: permissions.locationGranted,
+          onChanged: (_) {
+            ref.read(permissionsProvider.notifier).requestLocationAccess();
+          },
+          title: const Text('Location'),
+          subtitle: Text('${permissions.location}'),
+          
+        ),
       ],
     );
   }
